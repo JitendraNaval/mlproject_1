@@ -1,5 +1,4 @@
 # gunicorn_config.py
-
-bind = "0.0.0.0:8000"  # Use the same port as specified in your original Gunicorn command
+bind = "0.0.0.0:8000"
 workers = 3
-threads = 2  # Add threads if needed
+threads = 2
