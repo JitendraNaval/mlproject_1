@@ -26,16 +26,13 @@ def predict_datapoint():
 
         pred_df = data.get_data_as_data_frame()
         logging.info(f"Input data: {pred_df}")
-        print(pred_df)
-        print("Before Prediction")
 
         predict_pipeline = PredictPipeline()
-        print("Mid Prediction")
         results = predict_pipeline.predict(pred_df)
 
         logging.info(f"Prediction results: {results}")
-        print("After Prediction")
-        return render_template('home.html', results=results[0])
+
+        return render_template('home.html', results=results[0] if results else None)
 
 if __name__ == "__main__":
     serve(application, host='0.0.0.0', port=8000)
