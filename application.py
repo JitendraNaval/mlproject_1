@@ -2,6 +2,7 @@ from flask import Flask,request,render_template
 import numpy as np
 import pandas as pd
 from src.logger import logging
+from waitress import serve
 
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
@@ -43,7 +44,11 @@ def predict_datapoint():
         logging.info(f"Prediction results: {results}")
         print("after Prediction")
         return render_template('home.html',results=results[0])
-    
+
+mode="prod"   
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0")        
+    if mode=="dev":
+        app.run(host='0.0.0.0',port=8000,debug=True)
+    else:
+        serve(app,host='0.0.0.0',port=8000)       
